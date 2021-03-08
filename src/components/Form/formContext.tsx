@@ -3,14 +3,18 @@ import {
   accepted,
   age,
   city,
+  color,
   country,
   email,
+  film,
+  group,
   nickname,
   phone,
   reset,
   stage,
   surname,
-  username
+  username,
+  weather
 } from '../../types'
 
 interface IInitialState {
@@ -24,6 +28,10 @@ interface IInitialState {
   email: string
   country: string
   city: string
+  film: string
+  weather: string
+  group: string
+  color: string
 }
 
 export const FormContext = createContext({})
@@ -61,6 +69,14 @@ export const FormContextProvider: React.FC = ({children}) => {
         return returnFromPayloadTo(country)
       case city:
         return returnFromPayloadTo(city)
+      case film:
+        return returnFromPayloadTo(film)
+      case weather:
+        return returnFromPayloadTo(weather)
+      case group:
+        return returnFromPayloadTo(group)
+      case color:
+        return returnFromPayloadTo(color)
       default: {
         return state
       }
@@ -77,7 +93,11 @@ export const FormContextProvider: React.FC = ({children}) => {
     phone: '',
     email: '',
     country: '',
-    city: ''
+    city: '',
+    film: '',
+    weather: '',
+    group: '',
+    color: '',
   }
 
   const [state, dispatch] = useReducer(reducer, initialState)
