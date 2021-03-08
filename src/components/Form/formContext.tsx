@@ -3,17 +3,21 @@ import {
   accepted,
   age,
   city,
+  color,
   country,
   email,
+  film,
+  group,
   nickname,
   phone,
   reset,
   stage,
   surname,
-  username
+  username,
+  weather
 } from '../../types'
 
-interface IInitialState {
+export interface IInitialState {
   stage: number
   accepted: boolean
   age: string
@@ -24,15 +28,19 @@ interface IInitialState {
   email: string
   country: string
   city: string
+  film: string
+  weather: string
+  group: string
+  color: string
 }
 
-export const FormContext = createContext({})
+export const FormContext = createContext<any>(null)
 
 export const FormContextProvider: React.FC = ({children}) => {
 
-  const reducer = (state: IInitialState, action: { type: {}, payload?: {} }) => {
+  const reducer = (state: IInitialState, action: { type: string, payload?: string | number }) => {
 
-    const returnFromPayloadTo = (name: string): any => {
+    const returnFromPayloadTo = (name: string) => {
       return {...state, [name]: action.payload}
     }
 
@@ -61,6 +69,14 @@ export const FormContextProvider: React.FC = ({children}) => {
         return returnFromPayloadTo(country)
       case city:
         return returnFromPayloadTo(city)
+      case film:
+        return returnFromPayloadTo(film)
+      case weather:
+        return returnFromPayloadTo(weather)
+      case group:
+        return returnFromPayloadTo(group)
+      case color:
+        return returnFromPayloadTo(color)
       default: {
         return state
       }
@@ -77,15 +93,17 @@ export const FormContextProvider: React.FC = ({children}) => {
     phone: '',
     email: '',
     country: '',
-    city: ''
+    city: '',
+    film: '',
+    weather: '',
+    group: '',
+    color: ''
   }
 
   const [state, dispatch] = useReducer(reducer, initialState)
 
-  const contextValue = {state, dispatch}
-
   return (
-    <FormContext.Provider value={contextValue}>
+    <FormContext.Provider value={{state, dispatch}}>
       {children}
     </FormContext.Provider>
   )

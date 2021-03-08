@@ -1,28 +1,29 @@
 import React, { useContext } from 'react'
 import { Form, Formik } from 'formik'
 import { Input } from '../Input'
-import { validateEmail, validateRequired } from '../../utils'
+import { validateRequired } from '../../utils'
 import { FormContext } from './formContext'
 import { FormFooter } from './formFooter'
 import { resetState } from './actions'
+import * as types from '../../types'
 
 interface IInitialValues {
-  phone: string
-  email: string
-  country: string
-  city: string
+  film: string
+  weather: string
+  group: string
+  color: string
 }
 
 export const StageThree: React.FC = () => {
   const initialValues: IInitialValues = {
-    phone: '',
-    email: '',
-    country: '',
-    city: ''
+    film: '',
+    weather: '',
+    group: '',
+    color: ''
   }
 
   const {state, dispatch} = useContext<any>(FormContext)
-  const {phone, email, country, city} = state
+  const {film, weather, group, color} = state
 
   return (
     <Formik initialValues={initialValues} onSubmit={() => dispatch(resetState())}>
@@ -31,33 +32,33 @@ export const StageThree: React.FC = () => {
           <Input
             errors={errors}
             touched={touched}
-            name='phone'
-            validate={() => validateRequired(phone)}
-            label='Номер телефона'
+            name={types.film}
+            validate={() => validateRequired(film)}
+            label='Любимый фильм'
           />
           <Input
             errors={errors}
             touched={touched}
-            name='email'
-            validate={() => validateEmail(email)}
-            label='Ваш E-mail'
+            name={types.weather}
+            validate={() => validateRequired(weather)}
+            label='Любимая погода'
           />
           <Input
             errors={errors}
             touched={touched}
-            name='country'
-            validate={() => validateRequired(country)}
-            label='Страна'
+            name={types.group}
+            validate={() => validateRequired(group)}
+            label='Любимая группа'
           />
           <Input
             errors={errors}
             touched={touched}
-            name='city'
-            validate={() => validateRequired(city)}
-            label='Город'
+            name={types.color}
+            validate={() => validateRequired(color)}
+            label='Любимый цвет'
           />
           <FormFooter
-            fields={[phone, email, country, city]}
+            fields={[film, weather, group, color]}
             isValid={isValid}
             stage={1}
           />
