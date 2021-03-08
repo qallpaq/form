@@ -17,7 +17,7 @@ import {
   weather
 } from '../../types'
 
-interface IInitialState {
+export interface IInitialState {
   stage: number
   accepted: boolean
   age: string
@@ -34,13 +34,13 @@ interface IInitialState {
   color: string
 }
 
-export const FormContext = createContext({})
+export const FormContext = createContext<any>(null)
 
 export const FormContextProvider: React.FC = ({children}) => {
 
-  const reducer = (state: IInitialState, action: { type: {}, payload?: {} }) => {
+  const reducer = (state: IInitialState, action: { type: string, payload?: string | number }) => {
 
-    const returnFromPayloadTo = (name: string): any => {
+    const returnFromPayloadTo = (name: string) => {
       return {...state, [name]: action.payload}
     }
 
@@ -97,15 +97,13 @@ export const FormContextProvider: React.FC = ({children}) => {
     film: '',
     weather: '',
     group: '',
-    color: '',
+    color: ''
   }
 
   const [state, dispatch] = useReducer(reducer, initialState)
 
-  const contextValue = {state, dispatch}
-
   return (
-    <FormContext.Provider value={contextValue}>
+    <FormContext.Provider value={{state, dispatch}}>
       {children}
     </FormContext.Provider>
   )
