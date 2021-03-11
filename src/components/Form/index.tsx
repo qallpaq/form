@@ -3,7 +3,7 @@ import { Container, Paper } from '../../material'
 import { StageOne } from './stageOne'
 import { StageTwo } from './stageTwo'
 import { StageThree } from './stageThree'
-import { FormContext } from './formContext'
+import { FormContext, IContext } from './formContext'
 import {
   FormBar,
   FormBarItem,
@@ -13,7 +13,7 @@ import {
 } from './styles'
 
 export const RegistrationForm: React.FC = () => {
-  const {state: {stage}} = useContext<any>(FormContext)
+  const {state: {stage}} = useContext<IContext>(FormContext)
 
   return (
     <Container>

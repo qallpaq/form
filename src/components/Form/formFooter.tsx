@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import { Button } from '../../material'
 import { isEmpty } from '../../utils'
-import { FormContext } from './formContext'
+import { FormContext, IContext } from './formContext'
 import { accept, changeStage } from './actions'
 import {
   ButtonBack,
@@ -27,7 +27,7 @@ export const FormFooter: React.FC<IFormFooterProps> = ({
   back = true,
   stage
 }) => {
-  const {state: {accepted}, dispatch} = useContext<any>(FormContext)
+  const {state: {accepted}, dispatch} = useContext<IContext>(FormContext)
 
   const isDisabled = !(isValid && isEmpty(fields)) || !accepted
 

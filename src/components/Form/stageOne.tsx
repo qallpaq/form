@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 import { Form, Formik } from 'formik'
 import { Input } from '../Input'
 import { validateNumber, validateRequired } from '../../utils'
-import { FormContext } from './formContext'
+import { FormContext, IContext } from './formContext'
 import { FormFooter } from './formFooter'
 import { changeStage } from './actions'
 import * as types from '../../types'
@@ -15,7 +15,7 @@ interface IInitialValues {
 }
 
 export const StageOne: React.FC = () => {
-  const {state, dispatch} = useContext<any>(FormContext)
+  const {state, dispatch} = useContext<IContext>(FormContext)
   const {age, username, surname, nickname} = state
 
   const initialValues: IInitialValues = {

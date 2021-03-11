@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 import { Form, Formik } from 'formik'
 import { Input } from '../Input'
 import { validateRequired } from '../../utils'
-import { FormContext } from './formContext'
+import { FormContext, IContext } from './formContext'
 import { FormFooter } from './formFooter'
 import { resetState } from './actions'
 import * as types from '../../types'
@@ -22,7 +22,7 @@ export const StageThree: React.FC = () => {
     color: ''
   }
 
-  const {state, dispatch} = useContext<any>(FormContext)
+  const {state, dispatch} = useContext<IContext>(FormContext)
   const {film, weather, group, color} = state
 
   return (

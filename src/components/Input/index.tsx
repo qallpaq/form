@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { FormContext } from '../Form/formContext'
+import { FormContext, IContext } from '../Form/formContext'
 import { phoneMask } from '../../utils'
 import {
   InputError,
@@ -25,7 +25,7 @@ export const Input: React.FC<IInput> = ({
 }) => {
   const hasError: boolean = errors[name] && touched[name]
 
-  const {state, dispatch} = useContext<any>(FormContext)
+  const {state, dispatch} = useContext<IContext>(FormContext)
 
   const onInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     dispatch({type: name, payload: e.target.value})
@@ -34,7 +34,7 @@ export const Input: React.FC<IInput> = ({
   let value: string = state[name]
 
   if (name === 'phone') {
-    value = phoneMask(state[name]) || ''
+    value = phoneMask(value) || ''
   }
 
   return (

@@ -32,15 +32,44 @@ export interface IInitialState {
   weather: string
   group: string
   color: string
+
+  [index: string]: any
 }
 
-export const FormContext = createContext<any>(null)
+export interface IContext {
+  state: IInitialState
+  dispatch: any
+}
+
+const initialState: IInitialState = {
+  stage: 0,
+  accepted: false,
+  age: '',
+  username: '',
+  surname: '',
+  nickname: '',
+  phone: '',
+  email: '',
+  country: '',
+  city: '',
+  film: '',
+  weather: '',
+  group: '',
+  color: ''
+}
+
+interface IAction {
+  type: string
+  payload?: any
+}
+
+export const FormContext = createContext<IContext>({state: initialState, dispatch: () => null})
 
 export const FormContextProvider: React.FC = ({children}) => {
 
-  const reducer = (state: IInitialState, action: { type: string, payload?: string | number }) => {
+  const reducer = (state: IInitialState, action: IAction): IInitialState => {
 
-    const returnFromPayloadTo = (name: string) => {
+    const returnFromPayloadTo = (name: string): IInitialState => {
       return {...state, [name]: action.payload}
     }
 
@@ -81,23 +110,6 @@ export const FormContextProvider: React.FC = ({children}) => {
         return state
       }
     }
-  }
-
-  const initialState: IInitialState = {
-    stage: 0,
-    accepted: false,
-    age: '',
-    username: '',
-    surname: '',
-    nickname: '',
-    phone: '',
-    email: '',
-    country: '',
-    city: '',
-    film: '',
-    weather: '',
-    group: '',
-    color: ''
   }
 
   const [state, dispatch] = useReducer(reducer, initialState)

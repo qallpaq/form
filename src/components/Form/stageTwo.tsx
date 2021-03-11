@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 import { Form, Formik } from 'formik'
 import { Input } from '../Input'
 import { validateEmail, validateRequired } from '../../utils'
-import { FormContext } from './formContext'
+import { FormContext, IContext } from './formContext'
 import { FormFooter } from './formFooter'
 import { changeStage } from './actions'
 import * as types from '../../types'
@@ -22,7 +22,7 @@ export const StageTwo: React.FC = () => {
     city: ''
   }
 
-  const {state, dispatch} = useContext<any>(FormContext)
+  const {state, dispatch} = useContext<IContext>(FormContext)
   const {phone, email, country, city} = state
 
   return (
